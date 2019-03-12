@@ -74,13 +74,13 @@
         <v-subheader class="fill-height">ROM:</v-subheader>
       </v-flex>
       <v-flex shrink style="width: 45px">
-        <v-text-field v-model="ROM[0]" class="mt-0" hide-details single-line type="number"></v-text-field>
+        <v-text-field v-model="ROM[0]" class="mt-0" hide-details type="number"></v-text-field>
       </v-flex>
       <v-flex shrink>
         <v-subheader>to</v-subheader>
       </v-flex>
       <v-flex shrink style="width: 45px">
-        <v-text-field v-model="ROM[1]" class="mt-0" hide-details single-line type="number"></v-text-field>
+        <v-text-field v-model="ROM[1]" class="mt-0" hide-details type="number"></v-text-field>
       </v-flex>
       <v-flex>
         <v-subheader class="fill-height">degrees</v-subheader>
@@ -242,8 +242,8 @@
       </v-flex>
       <v-flex sm7></v-flex>
 
-      <v-flex sm2>
-        <v-subheader>Patellar:</v-subheader>
+      <v-flex shrink>
+        <v-subheader class="fill-height">Patellar:</v-subheader>
       </v-flex>
       <v-flex sm2>
         <v-text-field v-model="preOp" type="number" label="Pre-op" suffix="mm"></v-text-field>
@@ -274,7 +274,7 @@
       </v-flex>
 
       <v-flex shrink>
-        <v-subheader>打止血帶前血壓</v-subheader>
+        <v-subheader class="fill-height">打止血帶前血壓</v-subheader>
       </v-flex>
       <v-flex shrink px-0 style="width: 45px">
         <v-text-field v-model="systolic" type="number"></v-text-field>
