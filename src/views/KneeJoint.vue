@@ -39,13 +39,13 @@
       </v-flex>
 
       <v-flex sm2>
-        <v-text-field v-model="height" type="number" label="身高" suffix="cm"></v-text-field>
+        <v-select v-model="height" :items="Array.from(Array(251).keys())" label="身高" suffix="cm"></v-select>
       </v-flex>
       <v-flex sm2>
-        <v-text-field v-model="weight" type="number" label="體重" suffix="kg"></v-text-field>
+        <v-select v-model="weight" :items="Array.from(Array(151).keys())" label="體重" suffix="kg"></v-select>
       </v-flex>
       <v-flex sm2>
-        <v-text-field v-model="age" type="number" label="年齡" suffix="歲"></v-text-field>
+        <v-select v-model="age" :items="Array.from(Array(121).keys())" label="年齡" suffix="歲"></v-select>
       </v-flex>
       <v-flex sm3>
         <v-select v-model="gender" :items="['男', '女']" label="性別"></v-select>
@@ -74,13 +74,13 @@
         <v-subheader class="fill-height">ROM:</v-subheader>
       </v-flex>
       <v-flex shrink style="width: 45px">
-        <v-text-field v-model="ROM[0]" class="mt-0" hide-details type="number"></v-text-field>
+        <v-select v-model="ROM[0]" class="mt-0" :items="Array.from(Array(101).keys())" hide-details></v-select>
       </v-flex>
       <v-flex shrink>
         <v-subheader>to</v-subheader>
       </v-flex>
       <v-flex shrink style="width: 45px">
-        <v-text-field v-model="ROM[1]" class="mt-0" hide-details type="number"></v-text-field>
+        <v-select v-model="ROM[1]" class="mt-0" :items="Array.from(Array(101).keys())" hide-details></v-select>
       </v-flex>
       <v-flex>
         <v-subheader class="fill-height">degrees</v-subheader>
@@ -96,7 +96,7 @@
       <v-flex sm7></v-flex>
 
       <v-flex shrink offset-sm2>
-        <v-text-field v-model="kneeScore" label="術前 Knee Score" type="number"></v-text-field>
+        <v-select v-model="kneeScore" :items="Array.from(Array(101).keys())" label="術前 Knee Score"></v-select>
       </v-flex>
       <v-flex sm6></v-flex>
 
@@ -140,7 +140,7 @@
         <v-subheader class="fill-height pr-0">B.</v-subheader>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-model="femoralSize" type="number" label="Femoral size"></v-text-field>
+        <v-select v-model="femoralSize" :items="Array.from(Array(101).keys())" label="Femoral size"></v-select>
       </v-flex>
       <v-flex sm7></v-flex>
 
@@ -158,7 +158,12 @@
         <v-subheader class="fill-height pr-0">C.</v-subheader>
       </v-flex>
       <v-flex sm4>
-        <v-text-field v-model="insertThickness" type="number" label="Insert thickness" suffix="mm"></v-text-field>
+        <v-select
+          v-model="insertThickness"
+          :items="Array.from(Array(101).keys())"
+          label="Insert thickness"
+          suffix="mm"
+        ></v-select>
       </v-flex>
       <v-flex sm3>
         <v-select v-model="selfPay" :items="['YES', 'NO']" label="高耐磨自費 Insert"></v-select>
@@ -169,7 +174,7 @@
         <v-subheader class="fill-height pr-0">D.</v-subheader>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-model="tibiaSize" type="number" label="Tibia size"></v-text-field>
+        <v-select v-model="tibiaSize" :items="Array.from(Array(101).keys())" label="Tibia size"></v-select>
       </v-flex>
       <v-flex sm8></v-flex>
 
@@ -177,10 +182,15 @@
         <v-subheader class="fill-height pr-0">E.</v-subheader>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-model="patllaSize" type="number" label="Patella size"></v-text-field>
+        <v-select v-model="patllaSize" :items="Array.from(Array(101).keys())" label="Patella size"></v-select>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-model="thickness" type="number" label="Thickness" suffix="mm"></v-text-field>
+        <v-select
+          v-model="thickness"
+          :items="Array.from(Array(101).keys())"
+          label="Thickness"
+          suffix="mm"
+        ></v-select>
       </v-flex>
       <v-flex sm5></v-flex>
 
@@ -188,11 +198,11 @@
         <v-subheader class="fill-height pr-0">F.</v-subheader>
       </v-flex>
       <v-flex sm5>
-        <v-text-field
+        <v-select
           v-model="femoralExtemsionStemSize"
-          type="number"
+          :items="Array.from(Array(101).keys())"
           label="Femoral extemsion stem size"
-        ></v-text-field>
+        ></v-select>
       </v-flex>
       <v-flex sm6></v-flex>
 
@@ -200,11 +210,11 @@
         <v-subheader class="fill-height pr-0">G.</v-subheader>
       </v-flex>
       <v-flex sm4>
-        <v-text-field
+        <v-select
           v-model="tibiaExtemsionStemSize"
-          type="number"
+          :items="Array.from(Array(101).keys())"
           label="Tibia extemsion stem size"
-        ></v-text-field>
+        ></v-select>
       </v-flex>
       <v-flex sm7></v-flex>
 
@@ -245,13 +255,18 @@
       <v-flex shrink>
         <v-subheader class="fill-height">Patellar:</v-subheader>
       </v-flex>
-      <v-flex sm2>
-        <v-text-field v-model="preOp" type="number" label="Pre-op" suffix="mm"></v-text-field>
+      <v-flex sm3>
+        <v-select v-model="preOp" :items="Array.from(Array(101).keys())" label="Pre-op" suffix="mm"></v-select>
       </v-flex>
-      <v-flex sm2>
-        <v-text-field v-model="postOp" type="number" label="Post-op" suffix="mm"></v-text-field>
+      <v-flex sm3>
+        <v-select
+          v-model="postOp"
+          :items="Array.from(Array(101).keys())"
+          label="Post-op"
+          suffix="mm"
+        ></v-select>
       </v-flex>
-      <v-flex sm6></v-flex>
+      <v-flex sm4></v-flex>
 
       <v-flex sm3>
         <v-select v-model="boneCement" :items="['YES', 'NO']" label="骨水泥加抗生素"></v-select>
@@ -277,28 +292,48 @@
         <v-subheader class="fill-height">打止血帶前血壓</v-subheader>
       </v-flex>
       <v-flex shrink px-0 style="width: 45px">
-        <v-text-field v-model="systolic" type="number"></v-text-field>
+        <v-select v-model="systolic" :items="Array.from(Array(101).keys())"></v-select>
       </v-flex>
       <v-flex shrink px-0>
         <v-subheader class="fill-height">/</v-subheader>
       </v-flex>
       <v-flex shrink px-0 style="width: 45px">
-        <v-text-field v-model="diastolic" type="number"></v-text-field>
+        <v-select v-model="diastolic" :items="Array.from(Array(101).keys())"></v-select>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-model="tourniquetPressure" type="number" label="止血帶壓力" suffix="mmHg"></v-text-field>
+        <v-select
+          v-model="tourniquetPressure"
+          :items="Array.from(Array(101).keys())"
+          label="止血帶壓力"
+          suffix="mmHg"
+        ></v-select>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-model="hemostasisTime" type="number" label="止血帶時間" suffix="分鐘"></v-text-field>
+        <v-select
+          v-model="hemostasisTime"
+          :items="Array.from(Array(101).keys())"
+          label="止血帶時間"
+          suffix="分鐘"
+        ></v-select>
       </v-flex>
 
       <v-flex sm3>
-        <v-text-field v-model="operationTime" type="number" label="手術總共時間" suffix="分鐘"></v-text-field>
+        <v-select
+          v-model="operationTime"
+          :items="Array.from(Array(101).keys())"
+          label="手術總共時間"
+          suffix="分鐘"
+        ></v-select>
       </v-flex>
-      <v-flex sm2>
-        <v-text-field v-model="woundLength" type="number" label="傷口長度" suffix="公分"></v-text-field>
+      <v-flex sm3>
+        <v-select
+          v-model="woundLength"
+          :items="Array.from(Array(101).keys())"
+          label="傷口長度"
+          suffix="公分"
+        ></v-select>
       </v-flex>
-      <v-flex sm7></v-flex>
+      <v-flex sm6></v-flex>
 
       <v-flex sm12>
         <v-text-field v-model="specialCircumstances" label="特殊狀況"></v-text-field>
