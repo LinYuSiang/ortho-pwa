@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5b79d50b1c1cd3fed4ac8049c2e35dd2.js"
+  "/precache-manifest.091c9fdd4a57d0448c7c23613906930f.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "ortho-pwa"});
