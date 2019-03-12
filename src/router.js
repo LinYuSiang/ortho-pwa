@@ -24,7 +24,7 @@ export default new Router({
     },
     {
       path: '/knee-joint',
-      name: 'knee-joint',
+      name: '人工膝關節置換術中測量',
       component: KneeJoint
     }
   ]
