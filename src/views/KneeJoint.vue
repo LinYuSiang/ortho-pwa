@@ -1,8 +1,8 @@
 <template>
   <v-container id="input-usage" grid-list-xl fluid>
     <v-layout wrap>
-      <v-flex sm4 offset-sm8>
-        <date-picker class="sm4" :date.sync="date" label="手術日期"/>
+      <v-flex sm2 offset-sm10>
+        <date-picker :date.sync="date" label="手術日期"/>
       </v-flex>
 
       <v-flex sm3>
@@ -70,37 +70,37 @@
       <v-flex sm2>
         <v-subheader>Pre-op:</v-subheader>
       </v-flex>
-      <v-flex shrink>
-        <v-subheader class="fill-height">ROM:</v-subheader>
+      <v-flex sm1>
+        <v-subheader class="px-0">ROM:</v-subheader>
       </v-flex>
-      <v-flex shrink style="width: 45px">
+      <v-flex sm1>
         <v-select v-model="ROM[0]" class="mt-0" :items="Array.from(Array(101).keys())" hide-details></v-select>
       </v-flex>
       <v-flex shrink>
         <v-subheader>to</v-subheader>
       </v-flex>
-      <v-flex shrink style="width: 45px">
+      <v-flex sm1>
         <v-select v-model="ROM[1]" class="mt-0" :items="Array.from(Array(101).keys())" hide-details></v-select>
       </v-flex>
-      <v-flex>
-        <v-subheader class="fill-height">degrees</v-subheader>
+      <v-flex sm5>
+        <v-subheader>degrees</v-subheader>
       </v-flex>
 
-      <v-flex shrink offset-sm2>
+      <v-flex sm4 offset-sm2>
         <v-select
           v-model="preOpPatellarTracking"
           :items="['Good', 'Subluxation']"
           label="Patellar tracking"
         ></v-select>
       </v-flex>
-      <v-flex sm7></v-flex>
+      <v-flex sm6></v-flex>
 
-      <v-flex shrink offset-sm2>
+      <v-flex sm4 offset-sm2>
         <v-select v-model="kneeScore" :items="Array.from(Array(101).keys())" label="術前 Knee Score"></v-select>
       </v-flex>
       <v-flex sm6></v-flex>
 
-      <v-flex shrink>
+      <v-flex sm2>
         <v-subheader class="fill-height">Approach:</v-subheader>
       </v-flex>
       <v-flex sm4>
@@ -233,6 +233,10 @@
         <v-text-field v-model="others" label="其他術中特殊狀況"></v-text-field>
       </v-flex>
 
+      <v-flex sm12>
+        <v-divider></v-divider>
+      </v-flex>
+
       <v-flex sm3>
         <v-select v-model="lateralRelease" :items="['YES', 'NO']" label="Lateral Release"></v-select>
       </v-flex>
@@ -252,7 +256,7 @@
       </v-flex>
       <v-flex sm7></v-flex>
 
-      <v-flex shrink>
+      <v-flex sm2>
         <v-subheader class="fill-height">Patellar:</v-subheader>
       </v-flex>
       <v-flex sm3>
@@ -288,16 +292,16 @@
         ></v-text-field>
       </v-flex>
 
-      <v-flex shrink>
+      <v-flex sm3>
         <v-subheader class="fill-height">打止血帶前血壓</v-subheader>
       </v-flex>
-      <v-flex shrink px-0 style="width: 45px">
+      <v-flex sm1 px-0 style="width: 45px">
         <v-select v-model="systolic" :items="Array.from(Array(101).keys())"></v-select>
       </v-flex>
       <v-flex shrink px-0>
         <v-subheader class="fill-height">/</v-subheader>
       </v-flex>
-      <v-flex shrink px-0 style="width: 45px">
+      <v-flex sm1 px-0 style="width: 45px">
         <v-select v-model="diastolic" :items="Array.from(Array(101).keys())"></v-select>
       </v-flex>
       <v-flex sm3>
