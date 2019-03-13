@@ -9,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: '首頁',
       component: Home
     },
     {
