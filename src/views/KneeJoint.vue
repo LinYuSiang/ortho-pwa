@@ -1,5 +1,5 @@
 <template>
-  <v-container id="input-usage" grid-list-xl fluid>
+  <v-container grid-list-sm fluid>
     <v-layout wrap>
       <v-flex sm2 offset-sm10>
         <date-picker :date.sync="date" label="手術日期"/>
