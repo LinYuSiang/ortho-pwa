@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-toolbar>
-      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
+    <v-toolbar color="info" >
+      <v-toolbar-side-icon @click="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
+      <v-toolbar-title class="white--text font-weight-bold">{{ $route.name }}</v-toolbar-title>
     </v-toolbar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -42,8 +42,27 @@ export default {
         title: "人工膝關節置換術中測量",
         icon: "assignment",
         path: "/knee-joint"
+      },
+      {
+        title: "人工髖關節置換術中測量",
+        icon: "assignment",
+        path: "/hip-joint"
+      },
+      {
+        title: "牛津膝蓋評分",
+        icon: "assignment",
+        path: "/oks"
+      },
+      {
+       title: "Fullow up",
+       icon: "assignment",
+       path: "/fullow-up"
       }
     ]
+
+    
   })
+  
+ 
 };
 </script>
