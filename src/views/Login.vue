@@ -2,19 +2,20 @@
 <template>
      <v-container>
         <v-layout row class="text-xs-center">
-        <v-flex sm4></v-flex>
-            <v-card height="500px" ></v-card>
-        
-        <v-flex sm4 class="grey lighten-4">
-            <v-container style="position: relative;top: 13%;" class="text-xs-center">
-            <v-card flat>
+        <v-flex sm3></v-flex>
+            
+        <v-card height="500px" ></v-card>
+        <v-flex sm6 >
+            <v-container style="position: relative;top: 10%;" class="text-xs-center">
+            <v-card height="360px" >
                 <v-card-title primary-title>
-                <h4>Login</h4>
+                <v-subheader >Login</v-subheader>
                 </v-card-title>
                 <v-form>
                 <v-text-field prepend-icon="person" v-model="name" label="Username"></v-text-field>
                 <v-text-field prepend-icon="lock" v-model="password" label="Password" type="password"></v-text-field>
-                <v-card-actions>
+                <v-card height="30px" color="transparent" flat=""></v-card>
+                <v-card-actions style="top:13%">
                 <v-btn @click="login" large block color="info">Login</v-btn>
                 </v-card-actions>
                 </v-form>
@@ -48,7 +49,7 @@
             
             // console.log(auth);
             if (auth) {
-                this.$router.push('/');
+                this.$router.push('/home');
             }
             else
                 alert('login failed')

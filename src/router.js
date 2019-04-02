@@ -13,7 +13,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: '首頁',
       component: Home
     },
@@ -48,7 +48,7 @@ export default new Router({
     },
     {
       path: '/knee-joint',
-      name: '創建',
+      name: '創建knee',
       component: KneeJoint
     },
      {
@@ -57,9 +57,14 @@ export default new Router({
       component: Search
     },
     {
-      path: '/login',
+      path: '/',
       name: '登入',
       component: Login
+    },
+    {
+      path: '/hip-joint',
+      name: '創建hip',
+      component: HipJoint
     },
   ]
 })

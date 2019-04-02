@@ -37,7 +37,7 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { title: "首頁", icon: "dashboard", path: "/" },
+      { title: "首頁", icon: "dashboard", path: "/home" },
       {
         title: "人工膝關節置換術中測量",
         icon: "assignment",

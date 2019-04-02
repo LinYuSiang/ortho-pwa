@@ -13,11 +13,9 @@
         <v-text-field v-model="id" label="病例號碼"></v-text-field>
       </v-flex>
       <v-flex sm3>
-        <v-select v-model="type" :items="types" label="名稱"></v-select>
-      </v-flex>
-      <v-flex sm3>
         <v-text-field ref="typeText" v-model="typeText" label="其他" :disabled="type !== 'others'"></v-text-field>
       </v-flex>
+      <v-flex sm3></v-flex>
 
       <v-flex sm2>
         <v-select v-model="height" :items="Array.from(Array(251).keys())" label="身高" suffix="cm"></v-select>
@@ -258,9 +256,11 @@
       <v-flex sm3>
         <v-select v-model="feet" :items="['YES', 'NO']" label="長短腳"></v-select>
       </v-flex>
-       <v-flex sm3 offset-sm3>
+      <v-flex sm3 offset-sm3>
         <v-text-field v-model="complication" label="併發症"></v-text-field>
       </v-flex>
+
+      
 
 
     </v-layout>
