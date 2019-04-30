@@ -72,7 +72,7 @@ export default {
   }),
   methods:{
     logout(){
-        axios.post('http://211.23.17.100:9997/api/auth/logout', {
+        axios.post('https://web.nutc-imac.com:9997/api/auth/logout', {
        
     }, {
         headers: {

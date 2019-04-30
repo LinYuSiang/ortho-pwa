@@ -88,7 +88,7 @@ export default {
   created: function() {
     
       console.log(this.search)
-      axios.get('http://211.23.17.100:9997/api/knee-joint', {
+      axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
           params:{
 
           }
@@ -122,7 +122,7 @@ export default {
       if(this.search == "")
       {
         console.log(this.search)
-      axios.get('http://211.23.17.100:9997/api/knee-joint', {
+      axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
         params:{
              
         }
@@ -137,7 +137,7 @@ export default {
     }
       else{
       console.log(this.search)
-      axios.get('http://211.23.17.100:9997/api/knee-joint', {
+      axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
         params:{
               medical_record_no: this.search
         }
@@ -154,7 +154,7 @@ export default {
   // methods:{
   //   Search(){
   //     console.log(this.search)
-  //     axios.get('http://211.23.17.100:9997/api/knee-joint', {
+  //     axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
   //       params:{
   //             medical_record_no: this.search
   //       }

@@ -45,14 +45,14 @@
      methods: {
 
       login(){
-        //   axios.post('http://211.23.17.100:9997/api/auth/login', {
+        //   axios.post('https://web.nutc-imac.com:9997/api/auth/login', {
         //       account: 'admin',
         //       password: 'secret'
         //   })
         //   .then(({ data }) => {
         //       console.log(data)
         //   })
-          axios.post('http://211.23.17.100:9997/api/auth/login', {
+          axios.post('https://web.nutc-imac.com:9997/api/auth/login', {
               account: this.name,
               password: this.password
           }, {
