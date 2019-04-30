@@ -1,8 +1,14 @@
 <template>
+
   <v-app>
     <v-toolbar color="info" >
       <v-toolbar-side-icon @click="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
       <v-toolbar-title class="white--text font-weight-bold">{{ $route.name }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-down">
+        <v-btn color="white" flat @click="logout" >logout</v-btn>
+
+      </v-toolbar-items>
     </v-toolbar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -32,6 +38,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import router from './router';
 export default {
   name: "App",
   data: () => ({
@@ -61,8 +69,26 @@ export default {
     ]
 
     
-  })
-  
+  }),
+  methods:{
+    logout(){
+        axios.post('http://211.23.17.100:9997/api/auth/logout', {
+       
+    }, {
+        headers: {
+            Authorization:` Bearer ${localStorage.item}`
+        }
+    })
+    .then(({ data }) => {
+       router.push('/');
+        console.log(data)
+        localStorage.item=""
+        
+       
+    })
+    }
+  }
+
  
 };
 </script>

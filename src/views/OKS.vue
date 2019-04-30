@@ -92,6 +92,7 @@ export default {
     clean: "",
     transport: "",
     walk: "",
+    standpain:"",
     pain1: "",
     pain2: "",
     pain3: "",

@@ -2,14 +2,14 @@
   <v-container grid-list-sm fluid>
     <v-layout wrap>
       <v-flex sm2 offset-sm10>
-        <date-picker :date.sync="date" label="手術日期" />
+        <date-picker :date.sync="surgery_date" label="手術日期" />
       </v-flex>
 
       <v-flex sm3>
         <v-text-field v-model="name" label="姓名" ></v-text-field>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-model="id" label="病例號碼"></v-text-field>
+        <v-text-field v-model="medical_record_no" label="病例號碼"></v-text-field>
       </v-flex>
       <v-flex sm3>
         <v-text-field v-model="birthday" label="出生年月日"></v-text-field>
@@ -35,16 +35,16 @@
       </v-flex>
 
       <v-flex sm2>
-        <v-text-field v-model="height" @keyup="handleFilterLetters" :items="Array.from(Array(250).keys())" label="身高" suffix="cm"></v-text-field>
+        <v-text-field v-model="height" @keyup="handleFilterLetters" label="身高" suffix="cm"></v-text-field>
       </v-flex>
       <v-flex sm2>
-        <v-text-field v-model="weight"  @keyup="handleFilterLetters" :items="Array.from(Array(151).keys()) " label="體重" suffix="kg"></v-text-field>
+        <v-text-field v-model="weight"  @keyup="handleFilterLetters" label="體重" suffix="kg"></v-text-field>
       </v-flex>
       <v-flex sm2>
         <v-select v-model="age" :items="Array.from(Array(100).keys())" label="年齡" suffix="歲"></v-select>
       </v-flex>
       <v-flex sm3>
-        <v-select v-model="gender" :items="['男', '女']" label="性別"></v-select>
+        <v-select v-model="gender" :items="[{text:'男',value:'1'}, {text:'女', value:'0'}]" label="性別"></v-select>
       </v-flex>
       <v-flex sm3>
         <v-select v-model="leg" :items="['左', '右']" label="左右腳"></v-select>
@@ -394,13 +394,15 @@
       </v-flex>
       <v-flex sm2></v-flex>
 
-
+      <v-btn @click="Knee_joint">btn</v-btn>
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import DatePicker from "../components/DatePicker";
+import axios from 'axios';
+import router from '../router';
 
 export default {
   name: "knee-joint",
@@ -408,26 +410,39 @@ export default {
     DatePicker
   },
   data: () => ({
-    date: "",
+    surgery_date: "",
     name: "",
-    id: "",
-    types: ["OA", "RA", "SONK", "PVNS","traumatic OA","hemophilia","tumor","septic arthritis","s/p resection arthroplasty","Aseptic loosening","Periprosthetic fracture",{ text: "其他", value: "others" }],
-    birthday:"",
+    medical_record_no: "",
+    types: [
+      "OA",
+      "RA",
+      "SONK",
+      "PVNS",
+      "traumatic OA",
+      "hemophilia",
+      "tumor",
+      "septic arthritis",
+      "s/p resection arthroplasty",
+      "Aseptic loosening",
+      "Periprosthetic fracture",
+      { text: "其他", value: "others" }
+    ],
+    birthday: "",
     type: "",
     typeText: "",
     valgus: "",
-    valgusText:"",
+    valgusText: "",
     height: "",
     weight: "",
     age: "",
     gender: "",
-    BMIS:"",
+    BMIS: "",
     leg: "",
     anesthesias: ["GA", "SA", "SA+EA", { text: "其他", value: "others" }],
     anesthesia: "",
     anesthesiaText: "",
-    ROM1:"",
-    ROM2:"",
+    ROM1: "",
+    ROM2: "",
     preOpPatellarTracking: "",
     kneeScore: "",
     approachs: [
@@ -461,21 +476,56 @@ export default {
     selfPay: "",
     tibiaSize: "",
     patllaSize: "",
-    patllaSizes: [7,9,11,26,29,32,35],
+    patllaSizes: [7, 9, 11, 26, 29, 32, 35],
     thickness: "",
     femoralExtemsionStemSize: "",
-    femoralExtemsionStemSizes: ["10x30","10x75","10x100","10x145","11x30","11x75","11x100","11x145",
-                               "12x30","12x75","12x100","12x145","14x30","14x75","14x100","14x145",
-                               ],
+    femoralExtemsionStemSizes: [
+      "10x30",
+      "10x75",
+      "10x100",
+      "10x145",
+      "11x30",
+      "11x75",
+      "11x100",
+      "11x145",
+      "12x30",
+      "12x75",
+      "12x100",
+      "12x145",
+      "14x30",
+      "14x75",
+      "14x100",
+      "14x145"
+    ],
     tibiaExtemsionStemSize: "",
-    tibiaExtemsionStemSizes:["10x30","10x75","10x100","10x145","11x30","11x75","11x100","11x145",
-                             "12x30","12x75","12x100","12x145","14x30","14x75","14x100","14x145"
-                             ],
+    tibiaExtemsionStemSizes: [
+      "10x30",
+      "10x75",
+      "10x100",
+      "10x145",
+      "11x30",
+      "11x75",
+      "11x100",
+      "11x145",
+      "12x30",
+      "12x75",
+      "12x100",
+      "12x145",
+      "14x30",
+      "14x75",
+      "14x100",
+      "14x145"
+    ],
     wedge: "",
-    wedgepart:"",
-    wedgeparts:["distalmedia","distallateral","posteromedial","posterolateral"],
-    wedgethickness:"",
-    wedgethicknesses:["5mm","10mm"],
+    wedgepart: "",
+    wedgeparts: [
+      "distalmedia",
+      "distallateral",
+      "posteromedial",
+      "posterolateral"
+    ],
+    wedgethickness: "",
+    wedgethicknesses: ["5mm", "10mm"],
     others: "",
     lateralRelease: "",
     patellarTracking: "",
@@ -490,118 +540,195 @@ export default {
     operationTime: "",
     woundLength: "",
     specialCircumstances: "",
-    Clexane:"",
-    Clexanes:["BMI>30 Clexane" ,"BMI<30 但有其他風險"],
-    Remarks:"",
-    Remarkses:["特殊教學","併發症",{text:"其他" ,value:"others"}],
-    RemarksText:"",
-    PCA:"",
-    PCAs:["NO","IV","Epidural"],
-    PAI:"",
-    PAIs:["YES","NO"],
-    Tencam:"",
-    Tencams:["YES","NO"],
-    Transamine:"",
-    Transamines:["IA","IM","IM+IA","NO"],
-    TransamineText:"",
-    MedialDistal:"",
-    MedialPosterior:"",
-    MedialTibai:"",
-    LateralDistal:"",
-    LateralPosterior:"",
-    LateralTibai:"",
-
+    Clexane: "",
+    Clexanes: ["BMI>30 Clexane", "BMI<30 但有其他風險"],
+    Remarks: "",
+    Remarkses: ["特殊教學", "併發症", { text: "其他", value: "others" }],
+    RemarksText: "",
+    PCA: "",
+    PCAs: ["NO", "IV", "Epidural"],
+    PAI: "",
+    PAIs: ["YES", "NO"],
+    Tencam: "",
+    Tencams: ["YES", "NO"],
+    Transamine: "",
+    Transamines: ["IA", "IM", "IM+IA", "NO"],
+    TransamineText: "",
+    MedialDistal: "",
+    MedialPosterior: "",
+    MedialTibai: "",
+    LateralDistal: "",
+    LateralPosterior: "",
+    LateralTibai: ""
   }),
-  
+
   watch: {
     type(type) {
       if (type === "others") {
         this.$nextTick(this.$refs.typeText.focus);
       }
-      if(type !== "others"){
-        this.typeText ="";
+      if (type !== "others") {
+        this.typeText = "";
       }
     },
     anesthesia(anesthesia) {
       if (anesthesia === "others") {
         this.$nextTick(this.$refs.anesthesiaText.focus);
       }
-       if(anesthesia !== "others"){
-        this.anesthesiaText ="";
+      if (anesthesia !== "others") {
+        this.anesthesiaText = "";
       }
     },
     approach(approach) {
       if (approach === "others") {
         this.$nextTick(this.$refs.approachText.focus);
       }
-       if(approach !== "others"){
-        this.approachText ="";
-       }
+      if (approach !== "others") {
+        this.approachText = "";
+      }
     },
     boneCement(boneCement) {
       if (boneCement === "YES") {
         this.$nextTick(this.$refs.antibiotic.focus);
       }
-      if(boneCement !== "YES"){
-        this.antibiotic ="";
-       }
+      if (boneCement !== "YES") {
+        this.antibiotic = "";
+      }
     },
     valgus(valgus) {
       if (valgus === "yes") {
         this.$nextTick(this.$refs.valgusText.focus);
       }
-      if(valgus !== "yes"){
-        this.valgusText ="";
+      if (valgus !== "yes") {
+        this.valgusText = "";
       }
     },
-     wedgepart(wedgepart) {
-      if (["distalmedia", "distallateral", "posteromedial" , "posterolateral"].includes(wedgepart)) {
+    wedgepart(wedgepart) {
+      if (
+        [
+          "distalmedia",
+          "distallateral",
+          "posteromedial",
+          "posterolateral"
+        ].includes(wedgepart)
+      ) {
         this.$nextTick(this.$refs.wedgethickness.focus);
       }
     },
-     Transamine(Transamine) {
-      if (["IA","IM","IM+IA"].includes(Transamine)) {
+    Transamine(Transamine) {
+      if (["IA", "IM", "IM+IA"].includes(Transamine)) {
         this.$nextTick(this.$refs.TransamineText.focus);
       }
-       if(Transamine =="NO"){
-        this.TransamineText ="";
-       }
+      if (Transamine == "NO") {
+        this.TransamineText = "";
+      }
     },
-     Remarks(Remarks) {
+    Remarks(Remarks) {
       if (Remarks === "others") {
         this.$nextTick(this.$refs.RemarksText.focus);
       }
-       if(Remarks !=="others"){
-        this.RemarksText ="";
-       }
-    },
-    weight(){
-     {
-      
-       this.BMIS=this.weight/this.height/this.height*10000;
-       this.BMIS = this.BMIS.toFixed(2);
+      if (Remarks !== "others") {
+        this.RemarksText = "";
       }
     },
-    height(){
-     {
-        this.BMIS=this.weight/this.height/this.height*10000;
+    weight() {
+      {
+        this.BMIS = this.weight / this.height / this.height * 10000;
         this.BMIS = this.BMIS.toFixed(2);
       }
     },
-  
+    height() {
+      {
+        this.BMIS = this.weight / this.height / this.height * 10000;
+        this.BMIS = this.BMIS.toFixed(2);
+      }
+    }
   },
+  methods: {
+    handleFilterLetters: function() {
+      this.weight = this.weight.replace(/[^\d.]/g, "");
+      this.height = this.height.replace(/[^\d.]/g, "");
+    },
+    
+      
+    
+    Knee_joint(){
+      
+      axios.post('http://211.23.17.100:9997/api/knee-joint', {
+        medical_record_no: this.medical_record_no,
+        name: this.name, 
+        birthday: this.birthday,
+        bmi: this.BMIS,
+        height: this.height,
+        weight: this.weight,
+        gender: this.gender,
+        type: this.type,
+        type_other: this.typeText,
+        surgery_date: this.surgery_date,
+        valgus: this.valgus,
+        valgus_other: this.valgusText,
+        leg: this.leg,
+        anesthesia: this.anesthesia,
+        anesthesia_other: this.anesthesiaText,
+        rom_one: this.ROM1,
+        rom_two: this.ROM2,
+        pre_op_patellar_tracking: this.preOpPatellarTracking,
+        knee_score: this.kneeScore,
+        approach: this.approach,
+        approach_other: this.approachText,
+        approach_type: this.approachType,
+        femoral_size: this.femoralSize,
+        ps_type: this.PSType,
+        insert_thickness: this.insertThickness,
+        self_pay: this.selfPay,
+        tibia_size: this.tibiaSize,
+        patlla_size: this.patllaSize,
+        thickness: this.thickness,
+        femoral_extemsion_stem_size: this.femoralExtemsionStemSize,
+        tibia_extemsion_stem_size: this.tibiaExtemsionStemSize,
+        wedge_part: this.wedgepart,
+        wedge_thickness:this.wedgethickness,
+        lateral_release: this.lateralRelease,
+        patellar_tracking: this.patellarTracking,
+        pre_op: this.preOp,
+        post_op: this.postOp,
+        bone_cement: this.boneCement,
+        antibiotic: this.antibiotic,
+        systolic: this.systolic,
+        diastolic: this.diastolic,
+        tourniquet_pressure: this.tourniquetPressure,
+        hemostasis_time: this.hemostasisTime,
+        special_circumstances: this.specialCircumstances,
+        clexanes: this.Clexane,
+        remark: this.Remarks,
+        remark_other: this.RemarksText,
+        others: this.others,
+        pca: this.PCA,
+        pai: this.PAI,
+        tencam: this.Tencam,
+        transamine: this.Transamine,
+        transamine_text: this.TransamineText,
+        medial_distal: this.MedialDistal,
+        medial_posterior: this.MedialPosterior,
+        medial_tibai: this.MedialTibai,
+        lateral_distal: this.LateralDistal,
+        lateral_posterior: this.LateralPosterior,
+        lateral_tibai: this.LateralTibai
 
-   methods: {
-        handleFilterLetters: function()
-        {
-        this.weight = this.weight.replace(/[^\d.]/g, '');
-        this.height = this.height.replace(/[^\d.]/g, '');
-       
+    }, {
+        headers: {
+            Accept: 'application/json'
         }
-
-   }
-   
-}
-
-
+    })
+    .then(({ data }) => {
+          
+        router.push('/home');
+        console.log(data)
+        
+        
+       
+    })
+    }
+  }
+};
 </script>

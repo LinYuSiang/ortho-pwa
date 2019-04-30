@@ -66,5 +66,6 @@ export default new Router({
       name: '創建hip',
       component: HipJoint
     },
+    
   ]
 })
