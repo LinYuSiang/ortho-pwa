@@ -20,7 +20,7 @@
       </v-flex>
       <v-flex sm3>
         <v-text-field
-          v-if="valgus == 'yes'"
+          v-show="valgus == 'yes'"
           style="font-family:Calibri;"
           ref="valgusText"
           v-model="valgusText"
@@ -33,7 +33,7 @@
         <v-select v-model="type" :items="types" label="診斷" style="font-family:DFKai-sb;"></v-select>
       </v-flex>
       <v-flex sm3>
-        <v-text-field v-if="type == 'others'" ref="typeText" v-model="typeText" label="其他" :disabled="type !== 'others'" style="font-family:Calibri;"></v-text-field>
+        <v-text-field v-show="type == 'others'" ref="typeText" v-model="typeText" label="其他" :disabled="type !== 'others'" style="font-family:Calibri;"></v-text-field>
       </v-flex>
 
       <v-flex sm2>
@@ -57,7 +57,7 @@
       </v-flex>
       <v-flex sm3>
         <v-text-field
-          v-if="anesthesia == 'others'"
+          v-show="anesthesia == 'others'"
           style="font-family:DFKai-sb;"
           ref="anesthesiaText"
           v-model="anesthesiaText"
@@ -112,7 +112,7 @@
       </v-flex>
       <v-flex sm4>
         <v-text-field
-          v-if="approach == 'others'"
+          v-show="approach == 'others'"
           style="font-family:Calibri;"
           ref="approachText"
           v-model="approachText"
@@ -280,7 +280,7 @@
       </v-flex>
       <v-flex sm2>
         <v-select
-          v-if="boneCement == 'YES'"
+          v-show="boneCement == 'YES'"
           style="font-family:DFKai-sb;"
           ref="antibiotic"
           v-model="antibiotic"
@@ -336,7 +336,7 @@
       </v-flex>
       <v-flex sm4>
         <v-text-field
-          v-if="Remarks == 'others'"
+          v-show="Remarks == 'others'"
           style="font-family:DFKai-sb;"
           ref="RemarksText"
           v-model="RemarksText"
