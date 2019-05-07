@@ -24,11 +24,12 @@
             :items="desserts"
             hide-actions
             :pagination.sync="pagination"
+            :search="search"
           >
-          <template v-slot:items="props">
+          <template v-slot:items="props" >
             <tr @click="$router.push({ name:'首頁' })">
               <td>{{ props.item.patient.name }}</td>
-              <td class="text">{{ props.item.joint }}</td>
+              <td class="text">{{ props.item.joints }}</td>
               <td class="text">{{ props.item.patient.created_at }}</td>
               <td class="text">{{ props.item.patient.medical_record_no }}</td>
             </tr>
@@ -75,14 +76,17 @@ export default {
     headers: [
       {
         text: "病患名稱",
-        value: "name"
+        value: "patient.name"
       },
       { text: "資料表", value: "joint" },
-      { text: "紀錄時間", value: "time" },
-      { text: "病歷號碼", value: "number" }
+      { text: "紀錄時間", value: "patient.created_at" },
+      { text: "病歷號碼", value: "patient.medical_record_no" }
     ],
-    desserts: [
-     
+    desserts: [],
+    users: [
+      { 'user': 'barney',  'active': true },
+      { 'user': 'fred',    'active': false },
+      { 'user': 'pebbles', 'active': false }
     ]
   }),
   created: function() {
@@ -91,12 +95,21 @@ export default {
       axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
           params:{
 
-          }
+          }, headers: {
+            Authorization:` Bearer ${localStorage.item}`
+        }
       
           })
            .then(({ data }) => {
-              console.log(data);
+              
+              var array1 = data.kneeJoints;
+              array1.forEach(function(element) {
+                element.joints = '膝關節'
+              });
+              // console.log(data);
               this.desserts = data.kneeJoints;
+              // console.log(this.desserts);
+              
               this.pagination.totalItems = data.kneeJoints.length;
               
     })
@@ -116,40 +129,50 @@ export default {
       );
     }
   },
+  
 
-  watch:{
-    search(){
-      if(this.search == "")
-      {
-        console.log(this.search)
-      axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
-        params:{
+  // watch:{
+  //   search(){
+  //     if(this.search == "")
+  //     {
+  //       console.log(this.search)
+  //     axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
+  //       params:{
              
-        }
-          })
-           .then(({ data }) => {
-             
-              this.pagination.totalItems = data.kneeJoints.length;
-              this.desserts = data.kneeJoints;
-              console.log(this.desserts.length);
+  //       }
+  //         })
+  //          .then(({ data }) => {
+  //             var array1 = data.kneeJoints;
+  //             array1.forEach(function(element) {
+  //               element.joints = '膝關節'
+  //             });
+  //             console.log(data);
+  //             this.pagination.totalItems = data.kneeJoints.length;
+  //             this.desserts = data.kneeJoints;
+  //             console.log(this.desserts.length);
               
-    })
-    }
-      else{
-      console.log(this.search)
-      axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
-        params:{
-              medical_record_no: this.search
-        }
-          })
-           .then(({ data }) => {
-              this.pagination.totalItems = data.kneeJoints.length;
-              this.desserts = data.kneeJoints;
-              console.log(this.desserts.length);        
-    })
-    }
-    }
-  },
+  //   })
+  //   }
+  //     else{
+  //     console.log(this.search)
+  //     axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
+  //       params:{
+  //             medical_record_no: this.search
+  //       }
+  //         })
+  //          .then(({ data }) => {
+  //             var array1 = data.kneeJoints;
+  //             array1.forEach(function(element) {
+  //               element.joints = '膝關節'
+  //             });
+  //             console.log(data);
+  //             this.pagination.totalItems = data.kneeJoints.length;
+  //             this.desserts = data.kneeJoints;
+  //             console.log(this.desserts.length);        
+  //   })
+  //   }
+  //   }
+  // },
 
   // methods:{
   //   Search(){

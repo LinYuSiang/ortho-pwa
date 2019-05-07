@@ -36,10 +36,7 @@
     data :()=>({
         name:"",
         password:"",
-        vipname:"vip123",
-        vippass:"vip123",
-        
-        
+       
     }),
 
      methods: {

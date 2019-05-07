@@ -5,7 +5,9 @@
       <v-toolbar-side-icon @click="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
       <v-toolbar-title class="white--text font-weight-bold">{{ $route.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-title class="white--text font-weight-bold">歡迎XXX</v-toolbar-title>
       <v-toolbar-items class="hidden-down">
+        
         <v-btn color="white" flat @click="logout" >logout</v-btn>
 
       </v-toolbar-items>
