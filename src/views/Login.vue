@@ -32,23 +32,17 @@
   import router from '../router';
   import axios from 'axios';
   export default {
+    
     name:"home",
     data :()=>({
         name:"",
         password:"",
-       
     }),
-
-     methods: {
-
+   
+    props: ['loggedIn'],
+    methods:{
       login(){
-        //   axios.post('https://web.nutc-imac.com:9997/api/auth/login', {
-        //       account: 'admin',
-        //       password: 'secret'
-        //   })
-        //   .then(({ data }) => {
-        //       console.log(data)
-        //   })
+          const vm = this;
           axios.post('https://web.nutc-imac.com:9997/api/auth/login', {
               account: this.name,
               password: this.password
@@ -58,32 +52,14 @@
               }
           })
             .then(function (response) {
-                console.log(response.data.token);
-                
                 localStorage.setItem("item", response.data.token);
-                // console.log(localStorage.item);
+                vm.$emit('update:loggedIn', true);
                 router.push('/home');
             })
             .catch(function(response){
                  console.log(response) 
                  alert('login failed')
             })
-            
-      
-        // if (this.name == this.vipname && this.password == this.vippass ) {
-        //     let auth = true;
-            
-           
-        //     if (auth) {
-        //         this.$router.push('/home');
-        //     }
-        //     else
-        //         alert('login failed')
-        // }
-        //  else
-        //         alert('login failed')
-        
-        
       }
     } 
   }

@@ -5,15 +5,14 @@
       <v-toolbar-side-icon @click="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
       <v-toolbar-title class="white--text font-weight-bold">{{ $route.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title class="white--text font-weight-bold">歡迎XXX</v-toolbar-title>
+      <v-toolbar-title :loggedIn.sync="loggedIn" v-if="loggedIn"  class="white--text font-weight-bold">歡迎XXX</v-toolbar-title>
       <v-toolbar-items class="hidden-down">
-        
-        <v-btn color="white" flat @click="logout" >logout</v-btn>
-
+        <v-btn :loggedIn.sync="loggedIn"  v-if="loggedIn"  color="white" flat @click="logout" >logout</v-btn>
+      
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer  v-model="drawer" absolute temporary>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
 
@@ -34,18 +33,20 @@
     </v-navigation-drawer>
 
     <v-content>
-      <router-view></router-view>
+      <router-view :loggedIn.sync="loggedIn"></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import axios from 'axios';
-import router from './router';
+import axios from "axios";
+import router from "./router";
 export default {
   name: "App",
   data: () => ({
     drawer: null,
+    status: "",
+    loggedIn: localStorage.loggedIn === true,
     items: [
       { title: "首頁", icon: "dashboard", path: "/home" },
       {
@@ -64,33 +65,36 @@ export default {
         path: "/oks"
       },
       {
-       title: "Fullow up",
-       icon: "assignment",
-       path: "/fullow-up"
+        title: "Fullow up",
+        icon: "assignment",
+        path: "/fullow-up"
       }
     ]
-
-    
   }),
-  methods:{
-    logout(){
-        axios.post('https://web.nutc-imac.com:9997/api/auth/logout', {
-       
-    }, {
-        headers: {
-            Authorization:` Bearer ${localStorage.item}`
-        }
-    })
-    .then(({ data }) => {
-       router.push('/');
-        console.log(data)
-        localStorage.item=""
-        
-       
-    })
+  watch: {
+    loggedIn :(loggedIn) => {
+      localStorage.loggedIn = loggedIn;
+
+    }
+  },
+  methods: {
+    logout() {
+      axios
+        .post(
+          "https://web.nutc-imac.com:9997/api/auth/logout",
+          {},
+          {
+            headers: {
+              Authorization: ` Bearer ${localStorage.item}`
+            }
+          }
+        )
+        .then(() => {
+          this.loggedIn = false;
+          localStorage.item = "";
+          router.push("/");
+        });
     }
   }
-
- 
 };
 </script>
