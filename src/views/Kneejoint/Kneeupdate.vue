@@ -1,18 +1,29 @@
 <template>
   <v-container grid-list-sm fluid>
     <v-layout wrap>
-      <v-flex sm2 offset-sm10>
-        <date-picker :date.sync="surgery_date" label="手術日期" style="font-family:DFKai-sb;" />
-      </v-flex>
+     
 
       <v-flex sm4>
-        <v-text-field v-model="name"  label="姓名" style="font-family:DFKai-sb;" ></v-text-field>
+        <v-text-field v-model="name" disabled label="姓名" style="font-family:DFKai-sb;" ></v-text-field>
       </v-flex>
       <v-flex sm4>
-        <v-text-field v-model="medical_record_no" label="病例號碼" style="font-family:DFKai-sb;"></v-text-field>
+        <v-text-field v-model="medical_record_no" disabled label="病例號碼" style="font-family:DFKai-sb;"></v-text-field>
       </v-flex>
       <v-flex sm4>
-        <v-text-field v-model="birthday" label="出生年月日(YYYY-MM-DD)" style="font-family:DFKai-sb;"></v-text-field>
+        <v-text-field v-model="birthday" disabled label="出生年月日(YYYY-MM-DD)" style="font-family:DFKai-sb;"></v-text-field>
+      </v-flex>
+
+       <v-flex sm3>
+        <v-text-field v-model="height" disabled label="身高" suffix="cm" style="font-family:DFKai-sb;"></v-text-field>
+      </v-flex>
+      <v-flex sm3>
+        <v-text-field v-model="weight" disabled label="體重" suffix="kg" style="font-family:DFKai-sb;"></v-text-field>
+      </v-flex>
+      <v-flex sm3>
+        <v-select v-model="gender" :items="genders" disabled label="性別" style="font-family:DFKai-sb;"></v-select>
+      </v-flex>
+     <v-flex sm3>
+        <v-subheader  v-model="BMIS" style="font-family:Calibri;">BMI:{{ BMIS }}</v-subheader>  
       </v-flex>
       
       <v-flex sm3>
@@ -36,22 +47,6 @@
         <v-text-field v-show="type == 'others'" ref="typeText" v-model="typeText" label="其他" :disabled="type !== 'others'" style="font-family:Calibri;"></v-text-field>
       </v-flex>
 
-      <v-flex sm2>
-        <v-text-field v-model="height" @keyup="handleFilterLetters" label="身高" suffix="cm" style="font-family:DFKai-sb;"></v-text-field>
-      </v-flex>
-      <v-flex sm2>
-        <v-text-field v-model="weight"  @keyup="handleFilterLetters" label="體重" suffix="kg" style="font-family:DFKai-sb;"></v-text-field>
-      </v-flex>
-      <v-flex sm2>
-        <v-select v-model="age" :items="Array.from(Array(100).keys())" label="年齡" suffix="歲" style="font-family:DFKai-sb;"></v-select>
-      </v-flex>
-      <v-flex sm3>
-        <v-select v-model="gender" :items="[{text:'男',value:'1'}, {text:'女', value:'0'}]" label="性別" style="font-family:DFKai-sb;"></v-select>
-      </v-flex>
-      <v-flex sm3>
-        <v-select v-model="leg" :items="['左', '右']" label="左右腳" style="font-family:DFKai-sb;"></v-select>
-      </v-flex>
-
       <v-flex sm3>
         <v-select v-model="anesthesia" :items="anesthesias" label="麻醉" style="font-family:DFKai-sb;"></v-select>
       </v-flex>
@@ -66,8 +61,9 @@
         ></v-text-field>
       </v-flex>
       <v-flex sm3>
-        <v-subheader  v-model="BMIS" style="font-family:Calibri;">BMI:{{ BMIS }}</v-subheader>  
+        <v-select v-model="leg" :items="['左', '右']" label="左右腳" style="font-family:DFKai-sb;"></v-select>
       </v-flex>
+      
       <v-flex sm3></v-flex>
 
       <v-flex sm2>
@@ -418,34 +414,33 @@
       
       <v-dialog v-model="dialog" persistent max-width="290">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">送出</v-btn>
+        <v-btn color="green darken-1" dark v-on="on">更新</v-btn>
       </template>
       <v-card>
         <v-card-title class="headline">確認?</v-card-title>
-        <v-card-text>確定要輸入了嗎</v-card-text>
+        <v-card-text>確定要更新了嗎</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" flat @click="dialog = false">返回</v-btn>
-          <v-btn color="green darken-1" flat @click="Knee_joint">送出</v-btn>
+          <v-btn color="green darken-1" flat @click="kneeupdate">送出</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+     <v-btn  color="primary" @click="$router.push({ name:'膝關節病例' ,params:{msg} })" >上一頁 </v-btn>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import DatePicker from "../components/DatePicker";
+
 import axios from 'axios';
-import router from '../router';
+import router from '../../router';
+
 
 export default {
-  name: "knee-joint",
-  components: {
-    DatePicker
-  },
+ 
   data: () => ({
-    surgery_date: "",
+    msg:"",
     dialog:"",
     name: "",
     medical_record_no: "",
@@ -472,6 +467,7 @@ export default {
     weight: "",
     age: "",
     gender: "",
+    genders:[{text:"男",value:1}, {text:"女", value:0}],
     BMIS: "",
     leg: "",
     anesthesias: ["GA", "SA", "SA+EA", { text: "其他", value: "others" }],
@@ -597,8 +593,85 @@ export default {
     LateralPosterior: "",
     LateralTibai: ""
   }),
-
+   created: function(){       
+  
+     
+         axios.get(`https://web.nutc-imac.com:9997/api/knee-joint/${this.$route.params.id}`, {
+          headers: {
+            Accept: 'application/json',
+            Authorization:` Bearer ${localStorage.item}`,         
+        }  
+          })
+           .then(({ data }) => {
+            // console.log(data);
+             this.msg = data.kneeJoint.id,
+            this.medical_record_no = data.kneeJoint.patient.medical_record_no,
+            this.name = data.kneeJoint.patient.name, 
+            this.birthday = data.kneeJoint.patient.birthday,
+            this.BMIS = data.kneeJoint.patient.bmi,
+            this.height = data.kneeJoint.patient.height,
+            this.weight = data.kneeJoint.patient.weight,
+            this.gender = data.kneeJoint.patient.gender,
+            this.type = data.kneeJoint.type,
+            this.typeText = data.kneeJoint.type_other,
+            this.surgery_date = data.kneeJoint.surgery_date,
+            this.valgus = data.kneeJoint.valgus,
+            this.valgusText = data.kneeJoint.valgus_other,
+            this.leg = data.kneeJoint.leg,
+            this.anesthesia = data.kneeJoint.anesthesia,
+            this.anesthesiaText = data.kneeJoint.anesthesia_other,
+            this.ROM1 = data.kneeJoint.rom_one,
+            this.ROM2 = data.kneeJoint.rom_two,
+            this.preOpPatellarTracking = data.kneeJoint.pre_op_patellar_tracking,
+            this.kneeScore = data.kneeJoint.knee_score,
+            this.approach = data.kneeJoint.approach,
+            this.approachText = data.kneeJoint.approach_other,
+            this.approachType = data.kneeJoint.approach_type,
+            this.femoralSize = data.kneeJoint.femoral_size,
+            this.PSType = data.kneeJoint.ps_type,
+            this.insertThickness = data.kneeJoint.insert_thickness,
+            this.selfPay = data.kneeJoint.self_pay,
+            this.tibiaSize = data.kneeJoint.tibia_size,
+            this.patllaSize = data.kneeJoint.patlla_size,
+            this.thickness = data.kneeJoint.thickness,
+            this.femoralExtemsionStemSize = data.kneeJoint.femoral_extemsion_stem_size,
+            this.tibiaExtemsionStemSize = data.kneeJoint.tibia_extemsion_stem_size,
+            this.wedgepart = data.kneeJoint.wedge_part,
+            this.wedgethickness = data.kneeJoint.wedge_thickness,
+            this.lateralRelease = data.kneeJoint.lateral_release,
+            this.patellarTracking = data.kneeJoint.patellar_tracking,
+            this.preOp = data.kneeJoint.pre_op,
+            this.postOp = data.kneeJoint.post_op,
+            this.boneCement = data.kneeJoint.bone_cement,
+            this.antibiotic = data.kneeJoint.antibiotic,
+            this.systolic = data.kneeJoint.systolic,
+            this.diastolic = data.kneeJoint.diastolic,
+            this.tourniquetPressure = data.kneeJoint.tourniquet_pressure,
+            this.hemostasisTime = data.kneeJoint.hemostasis_time,
+            this.specialCircumstances = data.kneeJoint.special_circumstances,
+            this.Clexane = data.kneeJoint.clexanes,
+            this.Remarks = data.kneeJoint.remark,
+            this.RemarksText = data.kneeJoint.remark_other,
+            this.others = data.kneeJoint.others,
+            this.PCA = data.kneeJoint.pca,
+            this.PAI = data.kneeJoint.pai,
+            this.Tencam = data.kneeJoint.tencam,
+            this.Transamine = data.kneeJoint.transamine,
+            this.TransamineText = data.kneeJoint.transamine_text,
+            this.MedialDistal = data.kneeJoint.medial_distal,
+            this.MedialPosterior = data.kneeJoint.medial_posterior,
+            this.MedialTibai = data.kneeJoint.medial_tibai,
+            this.LateralDistal = data.kneeJoint.lateral_distal,
+            this.LateralPosterior = data.kneeJoint.lateral_posterior,
+            this.LateralTiba = data.kneeJoint.lateral_tibai
+       console.log(this.id);
+    })
+   },
   watch: {
+    name(){
+      // console.log(this.name);
+      
+    },
     type(type) {
       if (type === "others") {
         this.$nextTick(this.$refs.typeText.focus);
@@ -667,30 +740,19 @@ export default {
         this.RemarksText = "";
       }
     },
-    weight() {
-      {
-        this.BMIS = this.weight / this.height / this.height * 10000;
-        this.BMIS = this.BMIS.toFixed(2);
+    gender(){
+    if (this.genders == 1){
+        this.gender = "男"
       }
-    },
-    height() {
-      {
-        this.BMIS = this.weight / this.height / this.height * 10000;
-        this.BMIS = this.BMIS.toFixed(2);
+    if (this.genders  == 0){
+      this.gender = "女"
       }
     }
   },
-  methods: {
-    handleFilterLetters: function() {
-      this.weight = this.weight.replace(/[^\d.]/g, "");
-      this.height = this.height.replace(/[^\d.]/g, "");
-    },
+  methods:{
     
-      
-    
-    Knee_joint(){
-      
-      axios.post('https://web.nutc-imac.com:9997/api/knee-joint', {
+     kneeupdate(){
+        axios.put(`https://web.nutc-imac.com:9997/api/knee-joint/${this.$route.params.id}`, {
         medical_record_no: this.medical_record_no,
         name: this.name, 
         birthday: this.birthday,
@@ -700,7 +762,6 @@ export default {
         gender: this.gender,
         type: this.type,
         type_other: this.typeText,
-        surgery_date: this.surgery_date,
         valgus: this.valgus,
         valgus_other: this.valgusText,
         leg: this.leg,
@@ -750,21 +811,19 @@ export default {
         lateral_distal: this.LateralDistal,
         lateral_posterior: this.LateralPosterior,
         lateral_tibai: this.LateralTibai
-
-    }, {
-        headers: {
+         },{headers:{
             Accept: 'application/json',
-            Authorization:` Bearer ${localStorage.item}`
-        }
-    })
-    .then(({ data }) => {
+            Authorization:` Bearer ${localStorage.item}`,
+         }
+      
+          })
+          .then(() => { 
+          //  console.log(data);
+           
 
-        router.push('/home');
-        console.log(data)
-        
-        
-       
-    })
+            
+             router.push('/home');
+          })
     }
   }
 };

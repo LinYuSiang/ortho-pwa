@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import KneeJoint from './views/KneeJoint'
+import KneeJoint from './views/Kneejoint/KneeJoint'
 import OKS from './views/OKS'
 import HipJoint from './views/HipJoint'
 import Fullowup from './views/Fullowup'
 import Search from './views/Search'
 import Login from './views/Login'
+import Kneecase from './views/Kneejoint/Kneecase'
+import Kneeupdate from './views/Kneejoint/Kneeupdate'
 
 Vue.use(Router)
 
@@ -47,7 +49,7 @@ export default new Router({
       component: Fullowup
     },
     {
-      path: '/knee-joint',
+      path: '/Kneejoint/knee-joint',
       name: '創建knee',
       component: KneeJoint
     },
@@ -66,6 +68,20 @@ export default new Router({
       name: '創建hip',
       component: HipJoint
     },
-    
+    // {
+    //   path: '/hipcase',
+    //   name: '髖關節病例',
+    //   component: Hipcase
+    // },
+    {
+      path: '/Kneejoint/kneecase',
+      name: '膝關節病例',
+      component: Kneecase
+    },
+    {
+      path: '/Kneejoint/kneeupdate',
+      name: '更新膝關節病歷表',
+      component: Kneeupdate
+    },
   ]
 })

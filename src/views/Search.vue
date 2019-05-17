@@ -27,7 +27,7 @@
             :search="search"
           >
           <template v-slot:items="props" >
-            <tr @click="$router.push({ name:'首頁' })">
+            <tr @click="$router.push({ name:'膝關節病例' ,params:{msg:props.item.id} })">
               <td>{{ props.item.patient.name }}</td>
               <td class="text">{{ props.item.joints }}</td>
               <td class="text">{{ props.item.patient.created_at }}</td>
@@ -83,11 +83,6 @@ export default {
       { text: "病歷號碼", value: "patient.medical_record_no" }
     ],
     desserts: [],
-    users: [
-      { 'user': 'barney',  'active': true },
-      { 'user': 'fred',    'active': false },
-      { 'user': 'pebbles', 'active': false }
-    ]
   }),
   created: function() {
     
@@ -106,9 +101,9 @@ export default {
               array1.forEach(function(element) {
                 element.joints = '膝關節'
               });
-              // console.log(data);
+              console.log(data);
               this.desserts = data.kneeJoints;
-              // console.log(this.desserts);
+              console.log(this.desserts);
               
               this.pagination.totalItems = data.kneeJoints.length;
               
