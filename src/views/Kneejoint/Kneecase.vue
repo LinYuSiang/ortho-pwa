@@ -766,7 +766,7 @@ export default {
            
 
             
-             router.push('/home');
+             router.push('/search');
           })
       
     }
