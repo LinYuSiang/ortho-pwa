@@ -5,7 +5,7 @@
       <v-toolbar-side-icon @click="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
       <v-toolbar-title class="white--text font-weight-bold">{{ $route.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title :loggedIn.sync="loggedIn" v-if="loggedIn"  class="white--text font-weight-bold">歡迎XXX</v-toolbar-title>
+      <v-toolbar-title :loggedIn.sync="loggedIn" v-if="loggedIn"  class="white--text font-weight-bold">歡迎admin</v-toolbar-title>
       <v-toolbar-items class="hidden-down">
         <v-btn :loggedIn.sync="loggedIn"  v-if="loggedIn"  color="white" flat @click="logout" >logout</v-btn>
       
@@ -15,20 +15,53 @@
     <v-navigation-drawer  v-model="drawer" absolute temporary>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
+        
+         <v-list-tile
+          v-for="item in title"
+          :key="item.title"
+          @click="$router.push({ path: item.path })"
+        >
+        <v-list-tile-action>
+         <v-icon>{{ item.icon }}</v-icon>
+        </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+       </v-list-tile>
+      
+          <v-list-tile
+          v-for="item in search"
+          :key="item.title"
+          @click="$router.push({ path: item.path })"
+        >
+        <v-list-tile-action>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+       </v-list-tile>
 
+       <v-list-group
+        prepend-icon="create"
+          value="true"
+        >  
+        <template v-slot:activator>
+          <v-list-tile>
+            <v-list-tile-title>創建</v-list-tile-title>
+          </v-list-tile>
+        </template>
         <v-list-tile
           v-for="item in items"
           :key="item.title"
           @click="$router.push({ path: item.path })"
         >
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
+         <v-list-tile-action>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title  v-text="item.title"></v-list-tile-title>   
         </v-list-tile>
+         </v-list-group>
       </v-list>
     </v-navigation-drawer>
 
@@ -47,8 +80,12 @@ export default {
     drawer: null,
     status: "",
     loggedIn: localStorage.loggedIn === true,
+    title:[ { title: "首頁", icon: "dashboard", path: "/home" }],
+    search:[{
+        title: "查詢", icon: "search", path:"/search"
+      }],
     items: [
-      { title: "首頁", icon: "dashboard", path: "/home" },
+      
       {
         title: "人工膝關節置換術中測量",
         icon: "assignment",
@@ -68,7 +105,8 @@ export default {
         title: "Fullow up",
         icon: "assignment",
         path: "/fullow-up"
-      }
+      },
+      
     ]
   }),
   watch: {

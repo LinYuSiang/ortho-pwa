@@ -73,7 +73,7 @@
         <v-subheader class="px-0" style="font-family:Calibri;">ROM:</v-subheader>
       </v-flex>
       <v-flex sm1>
-        <v-select v-model="ROM1" class="mt-0" :items="Array.from(Array(151).keys())" hide-details style="font-family:Calibri;"></v-select>
+        <v-select  v-model="ROM1" class="mt-0" :items="Array.from(Array(151).keys())" hide-details style="font-family:Calibri;"></v-select>
       </v-flex>
       <v-flex shrink>
         <v-subheader>to</v-subheader>
@@ -664,7 +664,6 @@ export default {
             this.LateralDistal = data.kneeJoint.lateral_distal,
             this.LateralPosterior = data.kneeJoint.lateral_posterior,
             this.LateralTiba = data.kneeJoint.lateral_tibai
-       console.log(this.id);
     })
    },
   watch: {

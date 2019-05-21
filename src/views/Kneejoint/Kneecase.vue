@@ -2,11 +2,11 @@
   <v-container grid-list-sm fluid>
     <v-layout wrap>
       <v-flex sm2 offset-sm10>
-        <v-text-field v-model="surgery_date" disabled label="手術日期" style="font-family:DFKai-sb;" ></v-text-field>
+        <v-text-field v-model="surgery_date" disabled label="手術日期"  style="font-family:DFKai-sb;" ></v-text-field>
       </v-flex>
 
-      <v-flex sm4>
-        <v-text-field v-model="name"  label="姓名" disabled style="font-family:DFKai-sb;" ></v-text-field>
+      <v-flex sm4 >
+        <v-text-field  v-model="name"  label="姓名" disabled style="black" ></v-text-field>
       </v-flex>
       <v-flex sm4>
         <v-text-field v-model="medical_record_no" disabled label="病例號碼" style="font-family:DFKai-sb;"></v-text-field>
@@ -667,88 +667,7 @@ export default {
     })
    },
 
-  watch: {
-    type(type) {
-      if (type === "others") {
-        this.$nextTick(this.$refs.typeText.focus);
-      }
-      if (type !== "others") {
-        this.typeText = "";
-      }
-    },
-    anesthesia(anesthesia) {
-      if (anesthesia === "others") {
-        this.$nextTick(this.$refs.anesthesiaText.focus);
-      }
-      if (anesthesia !== "others") {
-        this.anesthesiaText = "";
-      }
-    },
-    approach(approach) {
-      if (approach === "others") {
-        this.$nextTick(this.$refs.approachText.focus);
-      }
-      if (approach !== "others") {
-        this.approachText = "";
-      }
-    },
-    boneCement(boneCement) {
-      if (boneCement === "YES") {
-        this.$nextTick(this.$refs.antibiotic.focus);
-      }
-      if (boneCement !== "YES") {
-        this.antibiotic = "";
-      }
-    },
-    valgus(valgus) {
-      if (valgus === "yes") {
-        this.$nextTick(this.$refs.valgusText.focus);
-      }
-      if (valgus !== "yes") {
-        this.valgusText = "";
-      }
-    },
-    wedgepart(wedgepart) {
-      if (
-        [
-          "distalmedia",
-          "distallateral",
-          "posteromedial",
-          "posterolateral"
-        ].includes(wedgepart)
-      ) {
-        this.$nextTick(this.$refs.wedgethickness.focus);
-      }
-    },
-    Transamine(Transamine) {
-      if (["IA", "IM", "IM+IA"].includes(Transamine)) {
-        this.$nextTick(this.$refs.TransamineText.focus);
-      }
-      if (Transamine == "NO") {
-        this.TransamineText = "";
-      }
-    },
-    Remarks(Remarks) {
-      if (Remarks === "others") {
-        this.$nextTick(this.$refs.RemarksText.focus);
-      }
-      if (Remarks !== "others") {
-        this.RemarksText = "";
-      }
-    },
-    weight() {
-      {
-        this.BMIS = this.weight / this.height / this.height * 10000;
-        this.BMIS = this.BMIS.toFixed(2);
-      }
-    },
-    height() {
-      {
-        this.BMIS = this.weight / this.height / this.height * 10000;
-        this.BMIS = this.BMIS.toFixed(2);
-      }
-    }
-  },
+   
   methods: {
     handleFilterLetters: function() {
       this.weight = this.weight.replace(/[^\d.]/g, "");
@@ -762,10 +681,6 @@ export default {
         }  
           })
              .then(() => { 
-          //  console.log(data);
-           
-
-            
              router.push('/search');
           })
       
