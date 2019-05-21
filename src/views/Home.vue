@@ -1,16 +1,21 @@
 <template>
-  <v-container grid-list-sm fluid>
-    <v-layout wrap>
-      <v-flex sm3 offset-sm1 >
-        <v-btn  color="info" @click="$router.push({ name:'創建knee' })"  large >創建 knee joint </v-btn>
+  <v-container grid-list-sm >
+    <v-layout align-center>
+      <v-flex sm3>
+        
+        <v-btn  color="primary" @click="$router.push({ name:'創建knee' })"  large >創建 knee joint </v-btn>
       </v-flex>
       <!-- <v-flex sm></v-flex> -->
-      <v-flex sm3 offset-sm1>
-        <v-btn style="width:173.19px" color="info" @click="$router.push({ name:'創建hip' })"  large >創建 hip joint </v-btn>
+      <v-flex sm3>
+        <v-btn style="width:173.19px" color="warning" dark @click="$router.push({ name:'創建hip' })"  large >創建 hip joint </v-btn>
       </v-flex>
       <!-- <v-flex sm1></v-flex> -->
-       <v-flex sm3 offset-sm1>
-        <v-btn style="width:173.19px" color="info" @click="$router.push({ name:'查詢' })"  large >查詢 </v-btn>
+       <v-flex sm3>
+        <v-btn style="width:173.19px" color="error" dark @click="$router.push({ name:'牛津膝蓋評分' })"  large >牛津膝蓋評分 </v-btn>
+      </v-flex>
+
+      <v-flex sm3>
+        <v-btn style="width:173.19px" color="teal" dark @click="$router.push({ name:'查詢' })"  large >查詢 </v-btn>
       </v-flex>
       <!-- <v-flex sm1></v-flex> -->
     
