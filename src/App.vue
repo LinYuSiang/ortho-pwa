@@ -102,9 +102,9 @@ export default {
         path: "/oks"
       },
       {
-        title: "Fullow up",
+        title: "Follow up",
         icon: "assignment",
-        path: "/fullow-up"
+        path: "/follow-up"
       },
       
     ]

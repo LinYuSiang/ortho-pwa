@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 import KneeJoint from './views/Kneejoint/KneeJoint'
 import OKS from './views/OKS'
 import HipJoint from './views/HipJoint'
-import Fullowup from './views/Fullowup'
+import Followup from './views/Followup'
 import Search from './views/Search'
 import Login from './views/Login'
 import Kneecase from './views/Kneejoint/Kneecase'
@@ -44,9 +44,9 @@ export default new Router({
       component: OKS
     },
     {
-      path: '/fullow-up',
-      name: 'Fullow-up',
-      component: Fullowup
+      path: '/follow-up',
+      name: 'Follow-up',
+      component: Followup
     },
     {
       path: '/Kneejoint/knee-joint',
