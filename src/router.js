@@ -9,6 +9,8 @@ import Search from './views/Search'
 import Login from './views/Login'
 import Kneecase from './views/Kneejoint/Kneecase'
 import Kneeupdate from './views/Kneejoint/Kneeupdate'
+import Patientlogin from './views/Patient/Patientlogin'
+import Patienthome from './views/Patient/Patienthome'
 
 Vue.use(Router)
 
@@ -60,7 +62,7 @@ export default new Router({
     },
     {
       path: '/',
-      name: '登入',
+      name: '醫師登入',
       component: Login
     },
     {
@@ -68,11 +70,11 @@ export default new Router({
       name: '創建hip',
       component: HipJoint
     },
-    // {
-    //   path: '/hipcase',
-    //   name: '髖關節病例',
-    //   component: Hipcase
-    // },
+    {
+      path: '/Patient/Patienthome',
+      name: '病人首頁',
+      component: Patienthome
+    },
     {
       path: '/Kneejoint/kneecase',
       name: '膝關節病例',
@@ -82,6 +84,11 @@ export default new Router({
       path: '/Kneejoint/kneeupdate',
       name: '更新膝關節病歷表',
       component: Kneeupdate
+    },
+    {
+      path: '/Patient/PateintLogin',
+      name: '訪客登入',
+      component: Patientlogin
     },
   ]
 })

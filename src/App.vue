@@ -1,8 +1,8 @@
 <template>
 
   <v-app>
-    <v-toolbar color="info" >
-      <v-toolbar-side-icon @click="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
+    <v-toolbar color="info"  >
+      <v-toolbar-side-icon @click="drawer = !drawer" class="white--text" :loggedIn.sync="loggedIn"  v-if="loggedIn"></v-toolbar-side-icon>
       <v-toolbar-title class="white--text font-weight-bold">{{ $route.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-title :loggedIn.sync="loggedIn" v-if="loggedIn"  class="white--text font-weight-bold">歡迎admin</v-toolbar-title>
@@ -74,12 +74,13 @@
 <script>
 import axios from "axios";
 import router from "./router";
+// import { log } from 'util';
 export default {
   name: "App",
   data: () => ({
     drawer: null,
     status: "",
-    loggedIn: localStorage.loggedIn === true,
+    loggedIn:localStorage.loggedIn == false,
     title:[ { title: "首頁", icon: "dashboard", path: "/home" }],
     search:[{
         title: "查詢", icon: "search", path:"/search"
@@ -109,9 +110,17 @@ export default {
       
     ]
   }),
+  created:function() {
+    if(localStorage.loggedIn == true)
+    {
+      this.loggedIn = true;
+    }
+  },
   watch: {
     loggedIn :(loggedIn) => {
       localStorage.loggedIn = loggedIn;
+      console.log(localStorage.loggedIn);
+      
 
     }
   },

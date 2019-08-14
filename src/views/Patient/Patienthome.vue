@@ -3,7 +3,7 @@
     <v-layout wrap>
       <v-flex sm8 offset-sm2>
         <v-card>
-           <v-toolbar dark color="primary">
+           <v-toolbar dark color="teal">
           <v-card-title class="title font-weight-regular">
             Search
             </v-card-title>
@@ -40,7 +40,7 @@
             </v-alert>
           </template>
         </v-data-table>
-        <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+        <v-pagination color="teal" v-model="pagination.page" :length="pages"></v-pagination>
       </v-card>
       </v-flex>
       <v-flex sm2></v-flex>
@@ -51,7 +51,7 @@
   
       
         <v-flex sm2 offset-sm2>
-          <v-btn  color="primary" @click="$router.push({ name:'首頁' })"  large >上一頁 </v-btn>
+          <v-btn  color="teal" dark @click="$router.push({ name:'首頁' })"  large >上一頁 </v-btn>
         </v-flex> 
       
       
@@ -64,7 +64,6 @@
     text-align: left;
   }
 </style>
-
 <script>
 import axios from 'axios';
 export default {
@@ -85,9 +84,8 @@ export default {
     desserts: [],
   }),
   created: function() {
-    
-      console.log(this.search)
-      axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
+
+      axios.get('https://web.nutc-imac.com:9997/api/patient/knee-joint', {
           params:{
 
           }, headers: {
@@ -98,17 +96,17 @@ export default {
         }
       
           })
-           .then(({ data }) => {
+             .then(({ data }) => {
               
-              var array1 = data.kneeJoints;
+              var array1 = data;
               array1.forEach(function(element) {
                 element.joints = '膝關節'
               });
               console.log(data);
-              this.desserts = data.kneeJoints;
+              this.desserts = data;
               console.log(this.desserts);
               
-              this.pagination.totalItems = data.kneeJoints.length;
+              this.pagination.totalItems = data.length;
             })
             .catch(({response}) =>{
                 console.log(response);
@@ -194,3 +192,4 @@ export default {
 };
 
 </script>
+ 
