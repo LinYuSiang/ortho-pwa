@@ -11,6 +11,7 @@ import Kneecase from './views/Kneejoint/Kneecase'
 import Kneeupdate from './views/Kneejoint/Kneeupdate'
 import Patientlogin from './views/Patient/Patientlogin'
 import Patienthome from './views/Patient/Patienthome'
+import KneeEvaluation from './views/KneeEvaluation'
 
 Vue.use(Router)
 
@@ -89,6 +90,11 @@ export default new Router({
       path: '/Patient/PateintLogin',
       name: '訪客登入',
       component: Patientlogin
+    },
+    {
+      path: '/KneeEvaluation',
+      name: '膝關節評估',
+      component: KneeEvaluation
     },
   ]
 })

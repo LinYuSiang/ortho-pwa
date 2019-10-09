@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-sm >
-    <v-layout align-center>
+    <v-layout wrap  >
       <v-flex sm3>
         
         <v-btn  style="width:173.19px; height:150px;font-size:18px;font-weight:bolder;" color="primary" @click="$router.push({ name:'創建knee' })"  large >創建 knee joint </v-btn>
@@ -18,8 +18,10 @@
         <v-btn style="width:173.19px; height:150px;font-size:18px;font-weight:bolder;" color="teal" dark @click="$router.push({ name:'查詢' })"  large >查詢 </v-btn>
       </v-flex>
       <!-- <v-flex sm1></v-flex> -->
+    <v-flex sm3>
+        <v-btn style="width:173.19px; height:150px;font-size:18px;font-weight:bolder;margin-top:30px" color="cyan" dark @click="$router.push({ name:'膝關節評估' })"  large >膝關節評估   </v-btn>
+      </v-flex>
     
-
 
 
     </v-layout>
