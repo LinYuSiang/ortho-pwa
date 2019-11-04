@@ -44,7 +44,7 @@
     methods:{
       login(){
           const vm = this;
-          axios.post('https://web.nutc-imac.com:9997/api/auth/login', {
+          axios.post('http://211.23.17.100:9997/api/auth/login', {
               account: this.name,
               password: this.password
           }, {
