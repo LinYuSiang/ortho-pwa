@@ -85,7 +85,7 @@ export default {
   }),
   created: function() {
 
-      axios.get('https://web.nutc-imac.com:9997/api/patient/knee-joint', {
+      axios.get('http://211.23.17.100:9997/api/patient/knee-joint', {
           params:{
 
           }, headers: {
