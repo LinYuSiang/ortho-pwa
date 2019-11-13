@@ -1,6 +1,18 @@
 <template>
   <v-container grid-list-sm fluid>
     <v-layout wrap>
+      <v-flex sm2 offset-sm10>
+        <date-picker :date.sync="surgery_date" label="手術日期" style="font-family:DFKai-sb;" />
+      </v-flex>
+       <v-flex sm2 offset-sm2>
+        <v-text-field v-model="name"  label="姓名" style="font-family:DFKai-sb;" ></v-text-field>
+      </v-flex>
+      <v-flex sm2 offset-sm1>
+        <v-text-field v-model="medical_record_no" label="病例號碼" style="font-family:DFKai-sb;"></v-text-field>
+      </v-flex>
+      <v-flex sm2 offset-sm1>
+        <v-text-field v-model="birthday" label="出生年月日(YYYY-MM-DD)" style="font-family:DFKai-sb;"></v-text-field>
+      </v-flex>
     <v-flex sm8 offset-sm2>
       <v-select v-model="kneePain" :items="kneePains" label="膝蓋疼痛多寡程度" ></v-select>
     </v-flex>
@@ -60,11 +72,13 @@
 </template>
 
 <script>
-
+import DatePicker from "../components/DatePicker";
 
 
 export default {
- 
+ components: {
+    DatePicker
+  },
   data: () => ({
     kneePains:[
       { text: "完全不疼痛", value: "50" },
