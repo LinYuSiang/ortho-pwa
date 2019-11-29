@@ -78,7 +78,7 @@ export default {
   created: function() {
     console.log(this.search);
     axios
-      .get("http://211.23.17.100:8000/api/knee-evaluation", {
+      .get("http://211.23.17.100:9997/api/knee-evaluation", {
         params: {},
         headers: {
           Accept: "application/json",

@@ -693,7 +693,7 @@ export default {
     
     Knee_joint(){
       
-      axios.post('http://211.23.17.100:8000/api/knee-joint', {
+      axios.post('http://211.23.17.100:9997/api/knee-joint', {
         medical_record_no: this.medical_record_no,
         name: this.name, 
         birthday: this.birthday,

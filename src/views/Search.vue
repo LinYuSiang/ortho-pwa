@@ -87,7 +87,7 @@ export default {
   created: function() {
     
       console.log(this.search)
-      axios.get('http://211.23.17.100:8000/api/knee-joint', {
+      axios.get('http://211.23.17.100:9997/api/knee-joint', {
           params:{
 
           }, headers: {

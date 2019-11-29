@@ -209,7 +209,7 @@ export default {
     console.log(this.$route.params.msg);
     axios
       .get(
-        `http://211.23.17.100:8000/api/knee-evaluation/${this.$route.params.msg}`,
+        `http://211.23.17.100:9997/api/knee-evaluation/${this.$route.params.msg}`,
         {
           headers: {
             Accept: "application/json",
