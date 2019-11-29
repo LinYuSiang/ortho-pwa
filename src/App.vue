@@ -128,7 +128,7 @@ export default {
     logout() {
       axios
         .post(
-          "https://web.nutc-imac.com:9997/api/auth/logout",
+          "http://211.23.17.100:8000/api/auth/logout",
           {},
           {
             headers: {

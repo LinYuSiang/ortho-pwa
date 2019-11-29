@@ -596,7 +596,7 @@ export default {
     LateralTibai: ""
   }),
   created: function(){       
-         axios.get(`http://211.23.17.100:9997/api/knee-joint/${this.$route.params.msg}`, {
+         axios.get(`http://211.23.17.100:8000/api/knee-joint/${this.$route.params.msg}`, {
           headers: {
             Accept: 'application/json',
             Authorization:` Bearer ${localStorage.item}`,         
@@ -674,7 +674,7 @@ export default {
       this.height = this.height.replace(/[^\d.]/g, "");
     },
     deleted() {
-      axios.delete(`https://web.nutc-imac.com:9997/api/knee-joint/${this.$route.params.msg}`, {
+      axios.delete(`http://211.23.17.100:8000/api/knee-joint/${this.$route.params.msg}`, {
           headers: {
             Accept: 'application/json',
             Authorization:` Bearer ${localStorage.item}`,         

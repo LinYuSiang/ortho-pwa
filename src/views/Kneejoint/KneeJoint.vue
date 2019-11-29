@@ -671,12 +671,15 @@ export default {
       {
         this.BMIS = this.weight / this.height / this.height * 10000;
         this.BMIS = this.BMIS.toFixed(2);
+       
+        
       }
     },
     height() {
       {
-        this.BMIS = this.weight / this.height / this.height * 10000;
+       this.BMIS = this.weight / this.height / this.height * 10000;
         this.BMIS = this.BMIS.toFixed(2);
+         console.log(this.BMIS);
       }
     }
   },
@@ -690,13 +693,13 @@ export default {
     
     Knee_joint(){
       
-      axios.post('http://211.23.17.100:9997/api/knee-joint', {
+      axios.post('http://211.23.17.100:8000/api/knee-joint', {
         medical_record_no: this.medical_record_no,
         name: this.name, 
         birthday: this.birthday,
-        bmi: this.BMIS,
-        height: this.height,
-        weight: this.weight,
+        bmi: parseInt(this.BMIS),
+        height: parseInt(this.height),
+        weight: parseInt(this.weight),
         gender: this.gender,
         type: this.type,
         type_other: this.typeText,
@@ -757,7 +760,7 @@ export default {
             Authorization:` Bearer ${localStorage.item}`
         }
     })
-    .then(({ data }) => {
+    .then(( {data} ) => {
 
         router.push('/home');
         console.log(data)

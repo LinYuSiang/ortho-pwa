@@ -19,7 +19,11 @@
       </v-flex>
       <!-- <v-flex sm1></v-flex> -->
     <v-flex sm3>
-        <v-btn style="width:173.19px; height:150px;font-size:18px;font-weight:bolder;margin-top:30px" color="cyan" dark @click="$router.push({ name:'膝關節評估' })"  large >膝關節評估   </v-btn>
+        <v-btn style="width:173.19px; height:150px;font-size:18px;font-weight:bolder;margin-top:30px" color="cyan" dark @click="$router.push({ name:'膝關節評估創建' })"  large >膝關節評估創建</v-btn>
+      </v-flex>
+
+      <v-flex sm3>
+        <v-btn style="width:173.19px; height:150px;font-size:18px;font-weight:bolder;margin-top:30px" color="cyan" dark @click="$router.push({ name:'膝關節評估搜尋' })"  large >膝關節評估搜尋  </v-btn>
       </v-flex>
     
 

@@ -46,7 +46,8 @@
     <v-flex sm8 offset-sm2>
       <v-select v-model="extensionlag" :items="extensionlags" label="伸直延遲 (extension lag) (如果有的話)" ></v-select>
     </v-flex>
-    <v-flex sm2></v-flex>
+
+   
 
     <v-flex sm10 offset-sm1>
       <v-subheader>請問您最近兩星期內，評估之膝關節，最痛的時候的疼痛程度為何? (0~10分) </v-subheader>
@@ -62,7 +63,7 @@
     <v-flex sm1></v-flex>
 
     <v-btn @click="text" dark>總分</v-btn>
-
+    <v-btn @click="kneeevaluation" dark>確定</v-btn>
     <v-flex sm8 offset-sm2>
      {{toal}}
     </v-flex>
@@ -73,13 +74,19 @@
 
 <script>
 import DatePicker from "../components/DatePicker";
-
+import {find} from "lodash"
+import axios from 'axios';
+import router from '../router';
 
 export default {
  components: {
     DatePicker
   },
   data: () => ({
+    name:"",
+    surgery_date: "",
+    medical_record_no:"",
+    birthday:"",
     kneePains:[
       { text: "完全不疼痛", value: "50" },
       { text: "輕微的痛 (偶發性疼痛)", value: "45" },
@@ -103,11 +110,11 @@ export default {
     ],
     jointragin:0,
     Anteroposteriors:[
-      { text: "< 5mm", value: "10" },
-      { text: "5-10mm ", value: "5" },
+      { text: "< 5mm", value: "10"  },
+      { text: "5-10mm ", value: "5"  },
       { text: ">10 mm ", value: "0" },
     ],
-    Anteroposterior:0,
+    Anteroposterior:null,
     Mediolaterals:[
       { text: "< 5度", value: "15" },
       { text: "6~9度 ", value: "10" },
@@ -138,15 +145,137 @@ export default {
       { text: "無", value: "0" },
     ],
     pains:0,
-    toal:0  ,
+    toal:0,
+    kneePainsnumber:null,
+    jointraginsnumber:null,
+    Anteroposteriorsnumber:null,
+    Mediolateralsnumber:null,
+    varusvalgusesnumber:null,
+    Flexioncontracturesnumber:null,
+    extensionlagsnumber:null,
+    kneePainstext:null,
+    jointraginstext:null,
+    Anteroposteriorstext:null,
+    Mediolateralstext:null,
+    varusvalgusestext:null,
+    Flexioncontracturestext:null,
+    extensionlagstext:null,
+
   }),
+  watch:
+  {
+    jointragin(value)
+    {
+      this.jointraginsnumber = find(this.jointragins ,{value})
+      console.log(this.jointraginsnumber.text);
+      this.jointraginstext = this.jointraginsnumber.text
+    },
+    kneePain(value)
+    {
+      this.kneePainsnumber = find(this.kneePains ,{value})
+      console.log(this.kneePainsnumber.text);
+       this.kneePainstext = this.kneePainsnumber.text
+    },
+    Mediolateral(value)
+    {
+      this.Mediolateralsnumber = find(this.Mediolaterals ,{value})
+      console.log(this.Mediolateralsnumber.text);
+       this.Mediolateralstext = this.Mediolateralsnumber.text
+    },
+    Anteroposterior(value)
+    {
+      this.Anteroposteriorsnumber = find(this.Anteroposteriors ,{value})
+      console.log(this.Anteroposteriorsnumber.text);
+       this.Anteroposteriorstext = this.Anteroposteriorsnumber.text
+    },
+    varusvalgus(value)
+    {
+      this.varusvalgusesnumber = find(this.varusvalguses ,{value})
+      console.log(this.varusvalgusesnumber.text);
+       this.varusvalgusestext = this.varusvalgusesnumber.text
+    },
+    Flexioncontracture(value)
+    {
+      this.Flexioncontracturesnumber = find(this.Flexioncontractures ,{value})
+      console.log(this.Flexioncontracturesnumber.text);
+       this.Flexioncontracturestext = this.Flexioncontracturesnumber.text
+    },
+     extensionlag(value)
+    {
+      this.extensionlagsnumber = find(this.extensionlags ,{value})
+      console.log(this.extensionlagsnumber.text);
+       this.extensionlagstext = this.extensionlagsnumber.text
+    },
+
+  },
+  
+  
   methods:
   {
     text: function () { 
       this.toal = parseInt(this.jointragin) + parseInt(this.kneePain) + parseInt(this.Anteroposterior) + parseInt(this.Mediolateral)
       + parseInt(this.varusvalgus) + parseInt(this.Flexioncontracture) + parseInt(this.extensionlag)
-      console.log(this.toal);
       
+    
+      console.log(this.toal);
+    },
+
+      kneeevaluation(){
+      
+      axios.post('http://211.23.17.100:8000/api/knee-evaluation', {
+        medical_record_no: this.medical_record_no,
+        name: this.name, 
+        birthday: this.birthday,
+        knee_pain: this.kneePainstext,
+        joint_range: this.jointraginstext,
+        antero_posterior: this.Anteroposteriorstext,
+        medio_lateral: this.Mediolateralstext, 
+        varus_valgus: this.varusvalgusestext,
+        flexion_contracture: this.Flexioncontracturestext,
+        extension_lag:this.extensionlagstext,
+        pains: this.pains,
+        toal:this.toal,
+        surgery_date:this.surgery_date,
+
+    }, {
+        headers: {
+            Accept: 'application/json',
+            Authorization:` Bearer ${localStorage.item}`
+        }
+      
+    })
+     .then(({ data }) => {
+              
+              console.log(data);
+              
+              
+             
+               router.push('/home');
+            })
+            .catch(() =>{
+                
+                
+            })
+    //  kneeevaluation(){  測試API
+    //     axios.post('http://localhost:8000/api/knee-evaluation', {
+
+    //     },{
+    //       headers: {
+    //         Accept: 'application/json',
+    //         Authorization:` Bearer ${localStorage.item}`
+    //         }
+    //     })
+    //     .then(function (response) {
+    //       console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     })
+    //     .finally(function () {
+    //       // always executed
+    //     });  
+      
+    
     }
   }
 

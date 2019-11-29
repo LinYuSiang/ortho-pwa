@@ -87,7 +87,7 @@ export default {
   created: function() {
     
       console.log(this.search)
-      axios.get('http://211.23.17.100:9997/api/knee-joint', {
+      axios.get('http://211.23.17.100:8000/api/knee-joint', {
           params:{
 
           }, headers: {
@@ -132,65 +132,7 @@ export default {
   },
   
 
-  // watch:{
-  //   search(){
-  //     if(this.search == "")
-  //     {
-  //       console.log(this.search)
-  //     axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
-  //       params:{
-             
-  //       }
-  //         })
-  //          .then(({ data }) => {
-  //             var array1 = data.kneeJoints;
-  //             array1.forEach(function(element) {
-  //               element.joints = '膝關節'
-  //             });
-  //             console.log(data);
-  //             this.pagination.totalItems = data.kneeJoints.length;
-  //             this.desserts = data.kneeJoints;
-  //             console.log(this.desserts.length);
-              
-  //   })
-  //   }
-  //     else{
-  //     console.log(this.search)
-  //     axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
-  //       params:{
-  //             medical_record_no: this.search
-  //       }
-  //         })
-  //          .then(({ data }) => {
-  //             var array1 = data.kneeJoints;
-  //             array1.forEach(function(element) {
-  //               element.joints = '膝關節'
-  //             });
-  //             console.log(data);
-  //             this.pagination.totalItems = data.kneeJoints.length;
-  //             this.desserts = data.kneeJoints;
-  //             console.log(this.desserts.length);        
-  //   })
-  //   }
-  //   }
-  // },
-
-  // methods:{
-  //   Search(){
-  //     console.log(this.search)
-  //     axios.get('https://web.nutc-imac.com:9997/api/knee-joint', {
-  //       params:{
-  //             medical_record_no: this.search
-  //       }
-  //         })
-  //          .then(({ data }) => {
-             
-  //             this.desserts = data.kneeJoints;
-  //             console.log(this.desserts);
-              
-  //   })
-  //   }
-  // }
+  
 };
 
 </script>

@@ -12,6 +12,8 @@ import Kneeupdate from './views/Kneejoint/Kneeupdate'
 import Patientlogin from './views/Patient/Patientlogin'
 import Patienthome from './views/Patient/Patienthome'
 import KneeEvaluation from './views/KneeEvaluation'
+import EvaluationSearch from './views/EvaluationSearch'
+import Evaluationcase from './views/Evaluationcase'
 
 Vue.use(Router)
 
@@ -93,8 +95,19 @@ export default new Router({
     },
     {
       path: '/KneeEvaluation',
-      name: '膝關節評估',
+      name: '膝關節評估創建',
       component: KneeEvaluation
     },
+    {
+      path: '/EvaluationSearch',
+      name: '膝關節評估搜尋',
+      component: EvaluationSearch
+    },
+    {
+      path: '/Evaluationcase',
+      name: '膝關節評估',
+      component: Evaluationcase
+    },
+    
   ]
 })
