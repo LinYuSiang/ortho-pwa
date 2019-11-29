@@ -44,7 +44,7 @@
     methods:{
       login(){
           const vm = this;
-          axios.post('http://211.23.17.100:8000/api/auth/login', {
+          axios.post('http://211.23.17.100:9997/api/auth/login', {
               account: this.name,
               password: this.password
           }, {
@@ -53,7 +53,7 @@
               }
               
           })
-            .then(function (response) {
+            .then(function (response) {     
                 localStorage.setItem("item", response.data.token);
                 vm.$emit('update:loggedIn', true);
                 router.push('/home');
