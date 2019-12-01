@@ -97,11 +97,7 @@ export default {
         icon: "assignment",
         path: "/hip-joint"
       },
-      {
-        title: "牛津膝蓋評分",
-        icon: "assignment",
-        path: "/oks"
-      },
+     
       {
         title: "Follow up",
         icon: "assignment",

@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import KneeJoint from './views/Kneejoint/KneeJoint'
-import OKS from './views/OKS'
 import HipJoint from './views/HipJoint'
 import Followup from './views/Followup'
 import Search from './views/Search'
@@ -42,11 +41,6 @@ export default new Router({
       path: '/hip-joint',
       name: '人工髖關節置換術中測量',
       component: HipJoint
-    },
-    {
-      path: '/oks',
-      name: '牛津膝蓋評分',
-      component: OKS
     },
     {
       path: '/follow-up',
