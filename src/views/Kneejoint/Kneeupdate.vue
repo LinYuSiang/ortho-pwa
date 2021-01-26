@@ -751,7 +751,7 @@ export default {
   methods:{
     
      kneeupdate(){
-        axios.put(`http://211.23.17.100:9997/api/knee-joint/${this.$route.params.id}`, {
+        axios.put(`http://localhost:8000/api/knee-joint/${this.$route.params.id}`, {
         medical_record_no: this.medical_record_no,
         name: this.name, 
         birthday: this.birthday,

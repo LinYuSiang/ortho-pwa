@@ -596,7 +596,7 @@ export default {
     LateralTibai: ""
   }),
   created: function(){       
-         axios.get(`http://211.23.17.100:9997/api/knee-joint/${this.$route.params.msg}`, {
+         axios.get(`http://localhost:8000/api/knee-joint/${this.$route.params.msg}`, {
           headers: {
             Accept: 'application/json',
             Authorization:` Bearer ${localStorage.item}`,         

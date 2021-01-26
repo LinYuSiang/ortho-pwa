@@ -41,7 +41,7 @@
     methods:{
       patientlogin(){
         //   const vm = this;
-          axios.post('http://211.23.17.100:9997/api/auth/patient/login', {
+          axios.post('http://localhost:8000/api/auth/patient/login', {
               medical_record_no: this.medical_record_no,
             
           }, {

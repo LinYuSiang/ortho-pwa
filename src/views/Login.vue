@@ -44,7 +44,7 @@
     methods:{
       login(){
           const vm = this;
-          axios.post('http://211.23.17.100:9997/api/auth/login', {
+          axios.post('http://localhost:8000/api/auth/login', {
               account: this.name,
               password: this.password
           }, {

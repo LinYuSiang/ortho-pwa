@@ -34,7 +34,7 @@ export default {
   watch: {
     newDate(newDate) {
       if (newDate !== this.date) {
-        this.$emit("update:date", newDate);
+        this.$emit("update:date",   );
       }
     }
   }
