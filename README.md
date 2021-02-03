@@ -1,39 +1,23 @@
 # ortho-pwa
+產學專案  
 
-## Project setup
-```
-yarn install
-```
+## 簡介
+1.使用vue.js vuetify 等框架與UI插件製作網站
+2.vue-router 進行畫面切換
+3.axios串接API
+4.javascript過濾及處理從API得到的資料，並對DOM進行非同步渲染
+5.RWD符合電腦螢幕、平板大小。
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-## 使用vue-router控制路由
-```
-npm install vue-router
-```
-
+## 使用技術
+vue.js
+vuetify
+vue-router
+axios
+javascript
+css
+html
+RWD
+localstrage
 
 ## Login page
 ![image](https://github.com/LinYuSiang/ortho-pwa/blob/master/pic/login.jpg)
